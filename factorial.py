@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import sys
 
 def factorial(n):
@@ -7,4 +8,16 @@ def factorial(n):
         n -= 1
     return result
 
-print(factorial(int(sys.argv[1])))
+if len(sys.argv) != 2:
+    print("Usage: python3 factorial.py <number>")
+    sys.exit(1)
+
+try:
+    num = int(sys.argv[1])
+    if num < 0:
+        raise ValueError("Number must be non-negative")
+except ValueError as e:
+    print("Error:", e)
+    sys.exit(1)
+
+print(factorial(num))
