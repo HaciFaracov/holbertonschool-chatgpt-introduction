@@ -1,28 +1,24 @@
+#!/usr/bin/python3
 import sys
-import math
 
-# Allows printing results larger than 4,300 digits
-sys.set_int_max_str_digits(0)
+def factorial(n):
+    result = 1
+    while n > 1:
+        result *= n
+        n -= 1   # Decrease n to avoid infinite loop
+    return result
 
-def main():
-    """
-    Entry point for calculating factorial via command line.
-    Calculates n! = n * (n-1) * ... * 1
-    """
-    if len(sys.argv) < 2:
-        print("Usage: python script.py <non-negative integer>")
-        return
+if len(sys.argv) != 2:
+    print("Usage: python3 script.py <number>")
+    sys.exit(1)
 
-    try:
-        n = int(sys.argv[1])
-        if n < 0:
-            raise ValueError("Number must be non-negative.")
-            
-        # math.factorial is the gold standard for performance
-        print(math.factorial(n))
-        
-    except ValueError as e:
-        print(f"Invalid input: {e}")
+try:
+    num = int(sys.argv[1])
+    if num < 0:
+        raise ValueError("Number must be non-negative")
+except ValueError as e:
+    print("Error:", e)
+    sys.exit(1)
 
-if __name__ == "__main__":
-    main()
+f = factorial(num)
+print(f)
